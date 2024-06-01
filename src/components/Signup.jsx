@@ -1,6 +1,8 @@
+// src/Signup.js
 import React, { useState } from "react";
 import towelImg from "../assets/images/background.jpg";
 import logo from "../assets/images/logomain.png";
+import Inputfields from './Inputfields';
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,7 +13,7 @@ const Signup = () => {
   const [confrimpassword, setConfirmpassword] = useState("");
 
   // console.log({ name, email, password, confrimpassword });
-  
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -19,6 +21,7 @@ const Signup = () => {
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
+
   return (
     <div className="relative h-screen w-screen">
       <img
@@ -36,107 +39,57 @@ const Signup = () => {
         <h2 className="font-Montserrat text-[36px] font-bold mb-4">Sign Up</h2>
 
         <div className="relative mb-4">
-          <input
+          <Inputfields
             id="Name"
             type="text"
             value={name}
-            onChange={(event) => {
-              console.log("Name:", event.target.value); // Debugging
-              setName(event.target.value);
-            }}
-            className="font-Montserrat block w-full px-2 py-2 text-lg bg-transparent border-b border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer"
-            placeholder=" "
+            onChange={(event) => setName(event.target.value)}
+            label="Name"
           />
-          <label
-            htmlFor="Name"
-            className="absolute left-0 top-2.5 text-gray-900 text-lg duration-300 transform -translate-y-6 scale-75 origin-0 peer-placeholder-shown:scale-100 
-          peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-gray-600 font-Montserrat"
-          >
-            Name
-          </label>
         </div>
 
-        {/* email */}
         <div className="relative mb-4">
-          <input
+          <Inputfields
             id="Email"
             type="email"
             value={email}
-            onChange={(event) => {
-              console.log("Email:", event.target.value); // Debugging
-              setEmail(event.target.value);
-            }}
-            className="font-Montserrat block w-full px-2 py-2 text-lg bg-transparent border-b border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer"
-            placeholder=" "
+            onChange={(event) => setEmail(event.target.value)}
+            label="Email"
           />
-          <label
-            htmlFor="Email"
-            className="absolute left-0 top-2.5 text-gray-900 text-lg duration-300 transform -translate-y-6 scale-75 origin-0 peer-placeholder-shown:scale-100 
-          peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-gray-600 font-Montserrat"
-          >
-            Email
-          </label>
         </div>
 
-        <div>
-          {/* Password */}
-          <div className="relative mb-4">
-            <input
-              id="Password"
-              value={password}
-              onChange={(event) => {
-                console.log("password:", event.target.value); // Debugging
-                setPassword(event.target.value);
-              }}
-              type={showPassword ? "text" : "password"}
-              className="font-Montserrat block w-full px-2 py-2 text-lg bg-transparent border-b border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer"
-              placeholder=" "
-            />
-            <label
-              htmlFor="Password"
-              className="absolute left-0 top-2.5 text-gray-900 text-lg duration-300 transform -translate-y-6 scale-75 origin-0 peer-placeholder-shown:scale-100 
-          peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-gray-600 font-Montserrat"
-            >
-              Password
-            </label>
-            <button
-              type="button"
-              onClick={togglePasswordVisibility}
-              className="absolute right-2 top-2.5 text-lg text-gray-600 focus:outline-none"
-            >
-              {showPassword ? "Hide" : "Show"}
-            </button>
-          </div>
-
-          {/* Confirm Password */}
-          <div className="relative mb-4">
-            <input
-              id="Confirm Password"
-              value={confrimpassword}
-              onChange={(event) => {
-                console.log("confrim password:", event.target.value); // Debugging
-                setConfirmpassword(event.target.value);
-              }}
-              type={showConfirmPassword ? "text" : "password"}
-              className="font-Montserrat block w-full px-2 py-2 text-lg bg-transparent border-b border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer"
-              placeholder=" "
-            />
-            <label
-              htmlFor="Confirm Password"
-              className="absolute left-0 top-2.5 text-gray-900 text-lg duration-300 transform -translate-y-6 scale-75 origin-0 peer-placeholder-shown:scale-100 
-          peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-gray-600 font-Montserrat"
-            >
-              Confirm Password
-            </label>
-            <button
-              type="button"
-              onClick={toggleConfirmPasswordVisibility}
-              className="absolute right-2 top-2.5 text-lg text-gray-600 focus:outline-none"
-            >
-              {showConfirmPassword ? "Hide" : "Show"}
-            </button>
-          </div>
+        <div className="relative mb-4">
+          <Inputfields
+            id="Password"
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            label="Password"
+            showPassword={showPassword}
+            togglePasswordVisibility={togglePasswordVisibility}
+          />
         </div>
+
+        <div className="relative mb-4">
+          <Inputfields
+            id="Confirm Password"
+            type="password"
+            value={confrimpassword}
+            onChange={(event) => setConfirmpassword(event.target.value)}
+            label="Confirm Password"
+            showPassword={showConfirmPassword}
+            togglePasswordVisibility={toggleConfirmPasswordVisibility}
+          />
+        </div>
+
+        <div className="relative mb-4">
+          <Inputfields
+            id="Options"
+            type="dropdown"
+            options={["QA", "QMS", "Employee"]}
+          />
+        </div>
+
         <button className="font-Montserrat bg-primary-button text-white px-4 py-2 rounded hover:bg-primary-button-hover w-full">
           Next
         </button>
